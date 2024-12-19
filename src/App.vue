@@ -36,9 +36,12 @@ let books = reactive([
         author: "Daniel Trejo",
     },
 ]);
-function pushNewCourse() {
-    courses.push(newCourse);
-    newCourse = { done: false };
+function toggleIsRead(id) {
+    books.forEach((book) => {
+        if (book.id === id) {
+            book.isRead = !book.isRead;
+        }
+    });
 }
 </script>
 <template>
@@ -49,7 +52,7 @@ function pushNewCourse() {
         </div>
 
         <div class="books-container">
-            <Books :books="books" />
+            <Books @toggleIsRead="toggleIsRead" :books="books" />
         </div>
     </div>
 </template>
