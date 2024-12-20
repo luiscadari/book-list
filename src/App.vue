@@ -2,6 +2,7 @@
 import { ref, reactive } from "vue";
 import Books from "./components/Books.vue";
 import BookProgress from "./components/BookProgress.vue";
+import AddBook from "./components/AddBook.vue";
 let newCourse = { done: false };
 let books = reactive([
     {
@@ -44,17 +45,23 @@ function toggleIsRead(id) {
         }
     });
 }
+let showAddBook = ref(false);
 </script>
 <template>
-    <div class="container">
+    <div class="container" v-if="!showAddBook">
         <h1>📖 Meus Livros</h1>
         <div class="header-btns">
-            <button class="btn">Adicionar Livro +</button>
+            <button @click="showAddBook = true" class="btn">
+                Adicionar Livro +
+            </button>
         </div>
 
         <div class="books-container">
             <Books @toggleIsRead="toggleIsRead" :books="books" />
             <BookProgress :books="books" />
         </div>
+    </div>
+    <div class="container" v-else>
+        <AddBook @closeAddBook="showAddBook = false" />
     </div>
 </template>
