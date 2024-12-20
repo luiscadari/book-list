@@ -3,7 +3,7 @@ import { ref, reactive } from "vue";
 import Books from "./components/Books.vue";
 import BookProgress from "./components/BookProgress.vue";
 import AddBook from "./components/AddBook.vue";
-let newCourse = { done: false };
+
 let books = reactive([
     {
         id: 1,
@@ -45,6 +45,13 @@ function toggleIsRead(id) {
         }
     });
 }
+
+function addBook(newBook) {
+    console.log(newBook);
+    books.push(newBook);
+    showAddBook.value = false;
+}
+
 let showAddBook = ref(false);
 </script>
 <template>
@@ -62,6 +69,6 @@ let showAddBook = ref(false);
         </div>
     </div>
     <div class="container" v-else>
-        <AddBook @closeAddBook="showAddBook = false" />
+        <AddBook @addBook="addBook" @closeAddBook="showAddBook = false" />
     </div>
 </template>

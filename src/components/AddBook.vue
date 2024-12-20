@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+let newBook = {
+    title: null,
+    cover: null,
+    isRead: false,
+    isbn: null,
+    author: null,
+};
+</script>
 
 <template>
     <h1>📖 Adicionar Livro</h1>
@@ -10,7 +18,13 @@
     <form class="add-form">
         <div class="form-control">
             <label>Título</label>
-            <input type="text" name="text" placeholder="Adicione o título" />
+            <input
+                v-model="newBook.title"
+                type="text"
+                name="text"
+                placeholder="Adicione o título"
+                required
+            />
         </div>
         <div class="form-control">
             <label>Capa</label>
@@ -18,21 +32,44 @@
                 type="text"
                 name="cover"
                 placeholder="Adicione o link da imagem de capa"
+                v-model="newBook.cover"
             />
         </div>
         <div class="form-control">
             <label>Autor</label>
-            <input type="text" name="author" placeholder="Adicione o autor" />
+            <input
+                type="text"
+                name="author"
+                placeholder="Adicione o autor"
+                v-model="newBook.author"
+                required
+            />
         </div>
         <div class="form-control">
             <label>ISBN#</label>
-            <input type="text" name="isbn" placeholder="Adicione o ISBN" />
+            <input
+                type="text"
+                name="isbn"
+                placeholder="Adicione o ISBN"
+                v-model="newBook.isbn"
+            />
         </div>
         <div class="form-control form-control-check">
-            <input type="checkbox" name="readIt" id="readIt" />
+            <input
+                type="checkbox"
+                name="readIt"
+                id="readIt"
+                v-model="newBook.isRead"
+            />
             <label for="readIt">Já li o livro</label>
         </div>
 
-        <button type="submit" class="btn btn-block">Salvar livro</button>
+        <button
+            @click.prevent="$emit('addBook', newBook)"
+            type="submit"
+            class="btn btn-block"
+        >
+            Salvar livro
+        </button>
     </form>
 </template>
