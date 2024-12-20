@@ -47,7 +47,8 @@ function toggleIsRead(id) {
 }
 
 function addBook(newBook) {
-    console.log(newBook);
+    const findNewId = Math.max(...books.map((book, index) => book.id)) + 1;
+    newBook.id = findNewId;
     books.push(newBook);
     showAddBook.value = false;
 }
